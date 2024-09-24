@@ -1,0 +1,77 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+class PriorityQueue {
+private:
+    vector<int> arr;
+
+public:
+    void insert(int element) {
+        arr.push_back(element);
+    }
+
+    int getHighestPriority() {
+        if (arr.empty()) {
+            cout << "Priority queue is empty." << endl;
+            return -1;
+        }
+
+        int maxIndex = 0;
+        for (int i = 1; i < arr.size(); i++) {
+            if (arr[i] > arr[maxIndex]) {
+                maxIndex = i;
+            }
+        }
+        return arr[maxIndex];
+    }
+
+    void deleteHighestPriority() {
+        if (arr.empty()) {
+            cout << "Priority queue is empty." << endl;
+            return;
+        }
+
+        int maxIndex = 0;
+        for (int i = 1; i < arr.size(); i++) {
+            if (arr[i] > arr[maxIndex]) {
+                maxIndex = i;
+            }
+        }
+
+        arr.erase(arr.begin() + maxIndex);
+    }
+
+    void display() {
+        if (arr.empty()) {
+            cout << "Priority queue is empty." << endl;
+            return;
+        }
+
+        for (int i = 0; i < arr.size(); i++) {
+            cout << arr[i] << " ";
+        }
+        cout << endl;
+    }
+};
+
+int main() {
+    PriorityQueue pq;
+    pq.insert(3);
+    pq.insert(5);
+    pq.insert(9);
+    pq.insert(2);
+    pq.insert(8);
+
+    cout << "Priority Queue: ";
+    pq.display();
+
+    cout << "Highest Priority Element: " << pq.getHighestPriority() << endl;
+
+    pq.deleteHighestPriority();
+    
+    cout << "After deleting highest priority element: ";
+    pq.display();
+
+    return 0;
+}
